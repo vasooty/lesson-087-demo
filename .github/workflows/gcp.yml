@@ -32,7 +32,9 @@ jobs:
       env:
         GIT_TAG: v0.1.0
       run: |-
-        gcloud docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
-        gcloud docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:$GIT_TAG
-        gcloud docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
-        gcloud docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:$GIT_TAG  
+        PASSWORD=$(gcloud auth application-default print-access-token)
+        docker login   --username=oauth2accesstoken   --password=${PASSWORD}   https://gcr.io
+        docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
+        docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:$GIT_TAG
+        docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
+        docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:$GIT_TAG  
