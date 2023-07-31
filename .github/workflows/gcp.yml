@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       IMAGE_NAME: lesson-087
-      PROJECT_ID: vasproject-394109
+      PROJECT_ID: devopsvas
     steps:
     - name: Checkout
       uses: actions/checkout@v2
